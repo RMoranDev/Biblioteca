@@ -1,0 +1,48 @@
+package br.com.ricardomoran.biblioteca.model;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
+
+public class Emprestimo {
+    private long id;
+    private Usuario usuario;
+    private Exemplar exemplar;
+    private LocalDateTime dataEmprestimo;
+    private LocalDateTime dataPrevistaDevolucao;
+    private LocalDateTime dataDevolucao;
+
+    public Emprestimo(Usuario usuario, Exemplar exemplar, LocalDateTime dataPrevistaDevolucao) {
+        this.usuario = Objects.requireNonNull(usuario, "Usuário é obrigatório");
+        this.exemplar = Objects.requireNonNull(exemplar, "Exemplar é obrigatório");
+        this.dataEmprestimo = LocalDateTime.now();
+        this.dataPrevistaDevolucao =
+                Objects.requireNonNull(
+                        dataPrevistaDevolucao,
+                        "Data prevista de devolução é obrigatória"
+                );
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public Exemplar getExemplar() {
+        return exemplar;
+    }
+
+    public LocalDateTime getDataEmprestimo() {
+        return dataEmprestimo;
+    }
+
+    public LocalDateTime getDataPrevistaDevolucao() {
+        return dataPrevistaDevolucao;
+    }
+
+    public LocalDateTime getDataDevolucao() {
+        return dataDevolucao;
+    }
+}
