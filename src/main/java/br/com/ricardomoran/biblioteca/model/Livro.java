@@ -1,5 +1,7 @@
 package br.com.ricardomoran.biblioteca.model;
 
+import br.com.ricardomoran.biblioteca.util.ValidacaoUtil;
+
 import java.time.Year;
 import java.util.Objects;
 
@@ -12,19 +14,13 @@ public class Livro {
     private Year anoPublicacao;
 
     public Livro(String titulo, String autor, String editora, String isbn, Year anoPublicacao) {
-        this.titulo = validarObrigatorio(titulo, "Título");
-        this.autor = validarObrigatorio(autor, "Autor");
-        this.editora = validarObrigatorio(editora, "Editora");
+        this.titulo = ValidacaoUtil.validarObrigatorio(titulo, "Título");
+        this.autor = ValidacaoUtil.validarObrigatorio(autor, "Autor");
+        this.editora = ValidacaoUtil.validarObrigatorio(editora, "Editora");
         this.anoPublicacao = Objects.requireNonNull(anoPublicacao, "Ano de publicação é obrigatório");
         this.isbn = isbn == null || isbn.isBlank() ? null : isbn; // opcional, pode ser null
     }
 
-    private static String validarObrigatorio(String valor, String nomeCampo) {
-        if (valor == null || valor.isBlank()) {
-            throw new IllegalArgumentException(nomeCampo + " é obrigatório");
-        }
-        return valor;
-    }
 
     public long getId() {
         return id;
@@ -35,7 +31,7 @@ public class Livro {
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = validarObrigatorio(titulo, "Título");
+        this.titulo = ValidacaoUtil.validarObrigatorio(titulo, "Título");
     }
 
     public String getAutor() {
@@ -43,7 +39,7 @@ public class Livro {
     }
 
     public void setAutor(String autor) {
-        this.autor = validarObrigatorio(autor, "Autor");
+        this.autor = ValidacaoUtil.validarObrigatorio(autor, "Autor");
     }
 
     public String getEditora() {
@@ -51,7 +47,7 @@ public class Livro {
     }
 
     public void setEditora(String editora) {
-        this.editora = validarObrigatorio(editora, "Editora");
+        this.editora = ValidacaoUtil.validarObrigatorio(editora, "Editora");
     }
 
     public String getIsbn() {

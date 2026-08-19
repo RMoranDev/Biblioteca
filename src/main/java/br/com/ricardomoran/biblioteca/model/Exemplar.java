@@ -1,5 +1,7 @@
 package br.com.ricardomoran.biblioteca.model;
 
+import br.com.ricardomoran.biblioteca.util.ValidacaoUtil;
+
 import java.util.Objects;
 
 public class Exemplar {
@@ -9,16 +11,10 @@ public class Exemplar {
     private Livro livro;
 
     public Exemplar(String codigoPatrimonio, Livro livro) {
-        this.codigoPatrimonio = validarObrigatorio(codigoPatrimonio, "Código de patrimônio");
+        this.codigoPatrimonio = ValidacaoUtil.validarObrigatorio(codigoPatrimonio, "Código de patrimônio");
         this.livro = Objects.requireNonNull(livro, "Livro é obrigatório");
     }
 
-    private static String validarObrigatorio(String valor, String nomeCampo) {
-        if (valor == null || valor.isBlank()) {
-            throw new IllegalArgumentException(nomeCampo + " é obrigatório");
-        }
-        return valor;
-    }
 
     public long getId() {
         return id;
@@ -29,7 +25,7 @@ public class Exemplar {
     }
 
     public void setCodigoPatrimonio(String codigoPatrimonio) {
-        this.codigoPatrimonio = validarObrigatorio(codigoPatrimonio, "Código de patrimônio");
+        this.codigoPatrimonio = ValidacaoUtil.validarObrigatorio(codigoPatrimonio, "Código de patrimônio");
     }
 
     public StatusExemplar getStatus() {
