@@ -37,3 +37,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Configurações locais do banco
+src/main/resources/db.properties
+
+# Toda a configuração da IDE
+.idea/
