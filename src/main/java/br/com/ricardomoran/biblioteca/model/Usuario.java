@@ -24,6 +24,10 @@ public class Usuario {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -58,4 +62,6 @@ public class Usuario {
     public void setTelefone(String telefone) {
         this.telefone = ValidacaoUtil.validarObrigatorio(telefone, "Telefone");
     }
+
+
 }

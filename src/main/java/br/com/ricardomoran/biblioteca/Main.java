@@ -1,20 +1,42 @@
 package br.com.ricardomoran.biblioteca;
 
-import br.com.ricardomoran.biblioteca.config.DatabaseConnection;
-
-import java.sql.Connection;
+import br.com.ricardomoran.biblioteca.model.Usuario;
+import br.com.ricardomoran.biblioteca.repository.UsuarioRepository;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        UsuarioRepository usuarioRepository = new UsuarioRepository();
 
-            System.out.println("Conexão realizada com sucesso!");
+        Usuario usuarioEncontrado = usuarioRepository.buscarPorId(1);
 
-        } catch (Exception e) {
-            System.out.println("Erro na conexão!");
-            e.printStackTrace();
+        //System.out.println(usuarioEncontrado.getNome());
+        System.out.println("""
+        ID: %d
+        Nome: %s
+        CPF: %s
+        E-mail: %s
+        Telefone: %s
+        """.formatted(
+                usuarioEncontrado.getId(),
+                usuarioEncontrado.getNome(),
+                usuarioEncontrado.getCpf(),
+                usuarioEncontrado.getEmail(),
+                usuarioEncontrado.getTelefone()
+        ));
+
+        System.out.println("Lista de Usuários:");
+        for (Usuario u : usuarioRepository.buscarTodos()) {
+            System.out.println(u.getId() + " - " + u.getNome());
+        }
+
+        Usuario usuarioParaAtualizar = usuarioRepository.buscarPorId(1L);
+
+        if (usuarioParaAtualizar != null) {
+            usuarioParaAtualizar.setNome("João Silva Atualizado");
+            usuarioRepository.atualizar(usuarioParaAtualizar);
+            System.out.println("Usuário atualizado com sucesso!");
         }
     }
 }
