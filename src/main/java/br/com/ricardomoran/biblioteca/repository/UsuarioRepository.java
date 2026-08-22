@@ -78,10 +78,10 @@ public class UsuarioRepository {
 
     public boolean atualizar(Usuario usuario) {
         String sql = """
-            UPDATE USUARIO 
-            SET nome = ?, cpf = ?, email = ?, telefone = ? 
-            WHERE idUsuario = ?
-            """;
+                UPDATE USUARIO
+                SET nome = ?, cpf = ?, email = ?, telefone = ?
+                WHERE idUsuario = ?
+                """;
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -127,6 +127,4 @@ public class UsuarioRepository {
         usuario.setId(rs.getLong("idUsuario"));
         return usuario;
     }
-
-
 }

@@ -22,8 +22,31 @@ public class Emprestimo {
                 );
     }
 
+    public Emprestimo(
+            Usuario usuario,
+            Exemplar exemplar,
+            LocalDateTime dataEmprestimo,
+            LocalDateTime dataPrevistaDevolucao,
+            LocalDateTime dataDevolucao
+    ) {
+        this.usuario = Objects.requireNonNull(usuario, "Usuário é obrigatório");
+        this.exemplar = Objects.requireNonNull(exemplar, "Exemplar é obrigatório");
+        this.dataEmprestimo =
+                Objects.requireNonNull(dataEmprestimo, "Data de empréstimo é obrigatória");
+        this.dataPrevistaDevolucao =
+                Objects.requireNonNull(
+                        dataPrevistaDevolucao,
+                        "Data prevista de devolução é obrigatória"
+                );
+        this.dataDevolucao = dataDevolucao;
+    }
+
     public long getId() {
         return id;
+    }
+
+    public void setId(long aLong) {
+        this.id = aLong;
     }
 
     public Usuario getUsuario() {

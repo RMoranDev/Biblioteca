@@ -20,6 +20,10 @@ public class Exemplar {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getCodigoPatrimonio() {
         return codigoPatrimonio;
     }
@@ -32,6 +36,13 @@ public class Exemplar {
         return status;
     }
 
+    public void setStatus(StatusExemplar status) {
+        if (status == null) {
+            throw new IllegalArgumentException("O status do exemplar não pode ser nulo.");
+        }
+        this.status = status;
+    }
+
     public Livro getLivro() {
         return livro;
     }
@@ -39,6 +50,5 @@ public class Exemplar {
     public void setLivro(Livro livro) {
         this.livro = Objects.requireNonNull(livro, "Livro é obrigatório");
     }
-
 
 }

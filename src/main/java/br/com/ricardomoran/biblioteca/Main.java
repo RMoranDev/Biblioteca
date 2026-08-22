@@ -1,42 +1,43 @@
 package br.com.ricardomoran.biblioteca;
 
-import br.com.ricardomoran.biblioteca.model.Usuario;
+import br.com.ricardomoran.biblioteca.model.*;
+import br.com.ricardomoran.biblioteca.repository.EmprestimoRepository;
+import br.com.ricardomoran.biblioteca.repository.ExemplarRepository;
 import br.com.ricardomoran.biblioteca.repository.UsuarioRepository;
+
+import java.time.LocalDateTime;
 
 public class Main {
 
     public static void main(String[] args) {
 
         UsuarioRepository usuarioRepository = new UsuarioRepository();
+        ExemplarRepository exemplarRepository = new ExemplarRepository();
+        EmprestimoRepository emprestimoRepository = new EmprestimoRepository();
 
-        Usuario usuarioEncontrado = usuarioRepository.buscarPorId(1);
+        Usuario usuario = usuarioRepository.buscarPorId(1);
+        Exemplar exemplar = exemplarRepository.buscarPorId(1);
 
-        //System.out.println(usuarioEncontrado.getNome());
-        System.out.println("""
-        ID: %d
-        Nome: %s
-        CPF: %s
-        E-mail: %s
-        Telefone: %s
-        """.formatted(
-                usuarioEncontrado.getId(),
-                usuarioEncontrado.getNome(),
-                usuarioEncontrado.getCpf(),
-                usuarioEncontrado.getEmail(),
-                usuarioEncontrado.getTelefone()
-        ));
+        if (usuario != null && exemplar != null) {
 
-        System.out.println("Lista de Usuários:");
-        for (Usuario u : usuarioRepository.buscarTodos()) {
-            System.out.println(u.getId() + " - " + u.getNome());
-        }
+            Emprestimo emprestimo = new Emprestimo(
+                    usuario,
+                    exemplar,
+                    LocalDateTime.now()
+            );
 
-        Usuario usuarioParaAtualizar = usuarioRepository.buscarPorId(1L);
+            Emprestimo emprestimoSalvo =
+                    emprestimoRepository.salvar(emprestimo);
 
-        if (usuarioParaAtualizar != null) {
-            usuarioParaAtualizar.setNome("João Silva Atualizado");
-            usuarioRepository.atualizar(usuarioParaAtualizar);
-            System.out.println("Usuário atualizado com sucesso!");
+            System.out.println(
+                    "Empréstimo salvo com sucesso! ID: "
+                            + emprestimoSalvo.getId()
+            );
+        } else {
+            System.out.println(
+                    "Usuário ou exemplar não encontrado."
+            );
         }
     }
 }
+
