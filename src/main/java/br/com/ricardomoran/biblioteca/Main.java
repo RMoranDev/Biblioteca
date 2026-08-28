@@ -1,43 +1,32 @@
 package br.com.ricardomoran.biblioteca;
 
 import br.com.ricardomoran.biblioteca.model.*;
-import br.com.ricardomoran.biblioteca.repository.EmprestimoRepository;
 import br.com.ricardomoran.biblioteca.repository.ExemplarRepository;
+import br.com.ricardomoran.biblioteca.repository.LivroRepository;
 import br.com.ricardomoran.biblioteca.repository.UsuarioRepository;
+import br.com.ricardomoran.biblioteca.service.EmprestimoService;
 
-import java.time.LocalDateTime;
+import java.time.Year;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
+        LivroRepository livroRepository = new LivroRepository();
         ExemplarRepository exemplarRepository = new ExemplarRepository();
-        EmprestimoRepository emprestimoRepository = new EmprestimoRepository();
+        Livro livro = livroRepository.buscarPorId(6L);
 
-        Usuario usuario = usuarioRepository.buscarPorId(1);
-        Exemplar exemplar = exemplarRepository.buscarPorId(1);
+        Exemplar exemplar = new Exemplar("PAT-018", livro);
+        Exemplar exemplar1 = new Exemplar("PAT-019", livro);
+        Exemplar exemplar2 = new Exemplar("PAT-020", livro);
+        Exemplar exemplar3 = new Exemplar("PAT-021", livro);
+        exemplarRepository.salvar(exemplar);
+        exemplarRepository.salvar(exemplar1);
+        exemplarRepository.salvar(exemplar2);
+        exemplarRepository.salvar(exemplar3);
 
-        if (usuario != null && exemplar != null) {
 
-            Emprestimo emprestimo = new Emprestimo(
-                    usuario,
-                    exemplar,
-                    LocalDateTime.now()
-            );
 
-            Emprestimo emprestimoSalvo =
-                    emprestimoRepository.salvar(emprestimo);
-
-            System.out.println(
-                    "Empréstimo salvo com sucesso! ID: "
-                            + emprestimoSalvo.getId()
-            );
-        } else {
-            System.out.println(
-                    "Usuário ou exemplar não encontrado."
-            );
-        }
     }
 }
 

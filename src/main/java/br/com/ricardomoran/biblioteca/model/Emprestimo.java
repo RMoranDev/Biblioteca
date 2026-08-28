@@ -11,15 +11,11 @@ public class Emprestimo {
     private LocalDateTime dataPrevistaDevolucao;
     private LocalDateTime dataDevolucao;
 
-    public Emprestimo(Usuario usuario, Exemplar exemplar, LocalDateTime dataPrevistaDevolucao) {
+    public Emprestimo(Usuario usuario, Exemplar exemplar) {
         this.usuario = Objects.requireNonNull(usuario, "Usuário é obrigatório");
         this.exemplar = Objects.requireNonNull(exemplar, "Exemplar é obrigatório");
         this.dataEmprestimo = LocalDateTime.now();
-        this.dataPrevistaDevolucao =
-                Objects.requireNonNull(
-                        dataPrevistaDevolucao,
-                        "Data prevista de devolução é obrigatória"
-                );
+        this.dataPrevistaDevolucao = dataEmprestimo.plusDays(7);
     }
 
     public Emprestimo(
@@ -67,5 +63,9 @@ public class Emprestimo {
 
     public LocalDateTime getDataDevolucao() {
         return dataDevolucao;
+    }
+
+    public void setDataDevolucao(LocalDateTime dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
     }
 }
