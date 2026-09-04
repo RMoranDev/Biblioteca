@@ -83,6 +83,19 @@ Atualmente, o banco possui quatro entidades principais:
 - EXEMPLAR
 - EMPRESTIMO
 
+- ## 🗄️ Banco de Dados
+
+O script de criação do banco e das tabelas está disponível em:
+
+`database/schema.sql`
+
+### Estrutura principal
+
+- Usuario
+- Livro
+- Exemplar
+- Emprestimo
+
 Relacionamentos
 ```text
 LIVRO
